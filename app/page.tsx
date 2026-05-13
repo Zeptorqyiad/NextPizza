@@ -1,4 +1,10 @@
-import { Title, TopBar, Container, Filters } from "@/components/shared"
+import {
+    Title,
+    TopBar,
+    Container,
+    Filters,
+    ProductCard,
+} from "@/components/shared"
 import Image from "next/image"
 import React from "react"
 
@@ -22,8 +28,7 @@ export default function Home() {
                     <div className="flex-1">
                         <div className="flex flex-col gap-16">
                             Список товаров
-                            {/* <ProductGroupList title="Пиццы" items={[1, 2, 3, 4, 5]} />
-                            <ProductGroupList title="Комбо" items={[1, 2, 3, 4, 5]} /> */}
+                            
                         </div>
                     </div>
                 </div>
