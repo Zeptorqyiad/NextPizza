@@ -14,13 +14,30 @@ interface Props {
     className?: string
 }
 
+interface PriceProps {
+    priceFrom: number
+    priceTo: number
+}
+
 export const Filters: React.FC<Props> = ({ className }) => {
-    const { ingredients, loading } = useFilterIngredients()
+    const { ingredients, loading, onAddId, selectedIds } =
+        useFilterIngredients()
+    const [prices, setPrices] = React.useState<PriceProps>({
+        priceFrom: 0,
+        priceTo: 5000,
+    })
 
     const items = ingredients.map((item) => ({
         value: String(item.id),
         text: item.name,
     }))
+
+    const updatePrice = (name: keyof PriceProps, value: number) => {
+        setPrices({
+            ...prices,
+            [name]: value
+        })
+    }
 
     return (
         <div className={className}>
@@ -31,8 +48,8 @@ export const Filters: React.FC<Props> = ({ className }) => {
             />
 
             <div className="flex flex-col gap-4">
-                <FilterCheckbox text="Можно собирать" value="1" />
-                <FilterCheckbox text="Новинки" value="2" />
+                <FilterCheckbox name="123" text="Можно собирать" value="1" />
+                <FilterCheckbox name="1243" text="Новинки" value="2" />
             </div>
 
             <div className="mt-5 border-y border-y-neutral-100 py-6 pb-7">
@@ -43,13 +60,14 @@ export const Filters: React.FC<Props> = ({ className }) => {
                         placeholder="0"
                         min={0}
                         max={1000}
-                        defaultValue={0}
+                        value={String(prices.priceFrom)}
                     />
                     <Input
                         type="number"
                         placeholder="1000"
                         min={100}
                         max={1000}
+                        value={String(prices.priceTo)}
                     />
                 </div>
 
@@ -63,6 +81,9 @@ export const Filters: React.FC<Props> = ({ className }) => {
                 defaultItems={items.slice(0, 6)}
                 items={items}
                 loading={loading}
+                onClickCheckbox={onAddId}
+                selectedIds={selectedIds}
+                name={"ingridients"}
             />
         </div>
     )
