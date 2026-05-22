@@ -10,3 +10,4 @@ export { FilterCheckbox } from './filter-checkbox'
 export { RangeSlider } from './range-slider'
 export { CheckboxFilterGroup } from './checkbox-filters-group';
 export { ProductCard } from "./product-card"
+export { ProductImage } from "./product-image"
