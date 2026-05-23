@@ -1,8 +1,13 @@
-import { Container, ProductImage, Title } from "@/components/shared"
+import {
+    Container,
+    ProductImage,
+    Title,
+    GroupVariants,
+} from "@/components/shared"
 import { prisma } from "@/prisma/prisma-client"
 import { notFound } from "next/navigation"
 
-export default async function ProductPage({
+export default async function ProductModalPage({
     params: { name },
 }: {
     params: { name: string }
@@ -40,7 +45,16 @@ export default async function ProductPage({
                     </p>
                 </div>
 
-                
+                <GroupVariants
+                    items={[
+                        {
+                            name: "Маленькая",
+                            value: "1",
+                        },
+                        { name: "Средняя", value: "2" },
+                        { name: "Большая", value: "3" },
+                    ]}
+                />
             </div>
         </Container>
     )
