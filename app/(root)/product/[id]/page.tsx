@@ -8,12 +8,12 @@ import { prisma } from "@/prisma/prisma-client"
 import { notFound } from "next/navigation"
 
 export default async function ProductPage({
-    params: { name },
+    params: { id },
 }: {
-    params: { name: string }
+    params: { id: string }
 }) {
-    const product = await prisma.product.findFirst({
-        where: { name: String(name) },
+    const product = await prisma.product.findUnique({
+        where: { id: String(id) },
     })
 
     if (!product) {
