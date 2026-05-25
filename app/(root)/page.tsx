@@ -1,5 +1,5 @@
-import { Title, TopBar, Container, Filters } from "@/components/shared"
-import { ProductsGroupList } from "@/components/shared/products-group-list"
+import { Title, TopBar, Container, Filters } from "@/shared/components/shared"
+import { ProductsGroupList } from "@/shared/components/shared/products-group-list"
 import { prisma } from "@/prisma/prisma-client"
 import React, { Suspense } from "react"
 
