@@ -6,6 +6,7 @@ import { Title } from "./title"
 import { cn } from "@/lib/utils"
 import { ProductCard } from "./product-card"
 import { useCategoryStore } from "@/store/category";
+import { Product } from "@/lib/generated/prisma/client";
 
 interface Props {
     title: string

@@ -1,6 +1,6 @@
 import {
     Container,
-    ProductImage,
+    PizzaImage,
     Title,
     GroupVariants,
 } from "@/components/shared"
@@ -25,7 +25,7 @@ export default async function ProductPage({
     return (
         <Container className="flex flex-col my-10">
             <div className="flex flex-1">
-                <ProductImage
+                <PizzaImage
                     imageUrl={product.imageUrl}
                     size={30}
                     className=""
