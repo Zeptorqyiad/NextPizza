@@ -9,6 +9,7 @@ import {
     pizzaTypes,
 } from "@/shared/constants/pizza"
 import { Ingredient } from "@/shared/lib/generated/prisma/client"
+import { useSet } from "react-use";
 
 interface Props {
     imageUrl: string
@@ -29,6 +30,8 @@ export const ChoosePizzaForm: React.FC<Props> = ({
 }) => {
     const [size, setSize] = React.useState<PizzaSize>(20)
     const [type, setType] = React.useState<PizzaType>(1)
+
+    const [selectedI] = useSet(new Set<number>([]))
 
     const textDetails = "30 см, традиционное тесто 30"
     const totalPrice = 350
@@ -56,16 +59,18 @@ export const ChoosePizzaForm: React.FC<Props> = ({
                     />
                 </div>
 
-                <div className="grid grid-cols-3 gap-3">
-                    {ingredients.map((item) => (
-                        <IngredientItem
-                            key={item.id}
-                            imageUrl={item.imageUrl}
-                            name={item.name}
-                            price={item.price}
-                            onClick={onClickAdd}
-                        />
-                    ))}
+                <div className="bg-gray-50 p-5 rounded-md h-[420px] overflow-auto scrollbar mt-5">
+                    <div className="grid grid-cols-3 gap-3">
+                        {ingredients.map((item) => (
+                            <IngredientItem
+                                key={item.id}
+                                imageUrl={item.imageUrl}
+                                name={item.name}
+                                price={item.price}
+                                onClick={onClickAdd}
+                            />
+                        ))}
+                    </div>
                 </div>
 
                 <Button className="h-[55px] px-10 text-base rounded-[18px] w-full mt-10">
