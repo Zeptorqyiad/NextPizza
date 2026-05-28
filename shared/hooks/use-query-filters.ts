@@ -1,7 +1,9 @@
-import { useRouter, useSearchParams } from "next/navigation"
-import { Filters } from "./use-filters"
-import React from "react"
-import qs from "qs"
+'use client'
+
+import { useRouter, useSearchParams } from 'next/navigation'
+import { Filters } from './use-filters'
+import React from 'react'
+import qs from 'qs'
 
 export const useQueryFilters = (filters: Filters) => {
     const router = useRouter()
@@ -15,7 +17,7 @@ export const useQueryFilters = (filters: Filters) => {
             ingredients: Array.from(filters.selectedIngredients),
         }
         const query = qs.stringify(params, {
-            arrayFormat: "comma",
+            arrayFormat: 'comma',
         })
 
         const newUrl = `?${query}`
