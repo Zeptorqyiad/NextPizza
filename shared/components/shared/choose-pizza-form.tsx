@@ -1,8 +1,10 @@
+'use client'
+
 import React from 'react'
 
 import { GroupVariants, IngredientItem, PizzaImage, Title } from '.'
 import { Button } from '@/shared/components/ui'
-import { mapPizzaType, PizzaSize, PizzaType, pizzaTypes } from '@/shared/constants/pizza'
+import { PizzaSize, PizzaType, pizzaTypes } from '@/shared/constants/pizza'
 import { Ingredient, ProductItem } from '@/shared/lib/generated/prisma/client'
 import { cn } from '@/shared/lib/utils'
 import { calcTotalPizzaPrice, getPizzaDetails } from '@/shared/lib'

@@ -1,4 +1,3 @@
-import { Variant } from '../components/shared/group-variants'
 import { mapPizzaType, PizzaSize, PizzaType } from '../constants/pizza'
 
 export const getPizzaDetails = (
