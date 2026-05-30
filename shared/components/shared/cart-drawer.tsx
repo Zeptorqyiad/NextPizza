@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import Link from 'next/link'
 
@@ -12,6 +14,8 @@ import {
 } from '@/shared/components/ui/sheet'
 import { Button } from '../ui'
 import { ArrowRight } from 'lucide-react'
+import { CartDrawerItem } from './cart-drawer-item'
+import { getCartItemDetails } from '@/shared/lib'
 
 interface Props {
     totalAmount?: any
@@ -23,6 +27,16 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
     totalAmount,
     className,
 }) => {
+    const [mounted, setMounted] = React.useState(false)
+
+    React.useEffect(() => {
+        setMounted(true)
+    }, [])
+
+    if (!mounted) {
+        return <>{children}</>
+    }
+
     return (
         <Sheet>
             <SheetTrigger asChild>{children}</SheetTrigger>
@@ -33,7 +47,20 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({
                     </SheetTitle>
                 </SheetHeader>
 
-                {/** Items */}
+                <div className="-mx-6 mt-5 overflow-auto scrollbar flex-1">
+                    <div className="mb-2">
+                        <CartDrawerItem
+                            id={1}
+                            imageUrl={
+                                'https://media.dodostatic.net/image/r:584x584/019d393af27672229e382b37b1988f6c.avif'
+                            }
+                            details={getCartItemDetails(2, 30, [{ name: 'Цыпленок', name: 'сыр' }])}
+                            name={'Чоризо фреш'}
+                            price={419}
+                            quantity={1}
+                        />
+                    </div>
+                </div>
 
                 <SheetFooter className="-mx-6 bg-white p-8">
                     <div className="w-full">
