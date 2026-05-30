@@ -1,23 +1,13 @@
 import { create } from 'zustand'
 import { Api } from '../services/api-client'
-import { getCartDetails } from '../lib';
-
-export type ICartItem = {
-    id: number
-    quantity: number
-    name: string
-    imageUrl: string
-    price: number
-    pizzaSize?: number | null
-    type?: number | null
-    ingredients: Array<{ name: string; price: number }>
-}
+import { getCartDetails } from '../lib'
+import { CartStateItem } from '../lib/get-cart-details'
 
 export interface CartState {
     loading: boolean
     error: boolean
     totalAmount: number
-    items: ICartItem[]
+    items: CartStateItem[]
 
     /** Получение товаров из корзины */
     fetchCartItems: () => Promise<void>
