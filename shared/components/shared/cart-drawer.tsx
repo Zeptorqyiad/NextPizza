@@ -6,6 +6,7 @@ import Link from 'next/link'
 import {
     Sheet,
     SheetContent,
+    SheetDescription,
     SheetFooter,
     SheetHeader,
     SheetTitle,
@@ -34,13 +35,18 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({ children,
         fetchCartItems()
     }, [])
 
+    const onCLickCountButton = (id: number, quantity: number, type: 'plus' | 'minus') => {
+        console.log(id, quantity, type)
+    }
+
     return (
         <Sheet>
             <SheetTrigger asChild>{children}</SheetTrigger>
             <SheetContent className="flex flex-col justify-between pb-0 bg-[#F4F1EE]">
+                <SheetDescription className="hidden" />
                 <SheetHeader>
                     <SheetTitle>
-                        В корзине <span className="font-bold">3 товара</span>
+                        В корзине <span className="font-bold">{items.length} товар</span>
                     </SheetTitle>
                 </SheetHeader>
 
@@ -63,6 +69,7 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({ children,
                                 name={item.name}
                                 price={item.price}
                                 quantity={item.quantity}
+                                onClickCountButton={() => onCLickCountButton}
                             />
                         ))}
                     </div>
