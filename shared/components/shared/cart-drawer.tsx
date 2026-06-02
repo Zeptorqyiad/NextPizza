@@ -33,6 +33,17 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({ children,
     const updateItemQuantity = useCartStore((state) => state.updateItemQuantity)
     const removeCartItem = useCartStore((state) => state.removeCartItem)
 
+    const countItem = items.length
+    let resultCountItem = ''
+
+    if (!countItem) {
+        resultCountItem = '0 товаров'
+    } else if (countItem === 1) {
+        resultCountItem = '1 товар'
+    } else {
+        resultCountItem = `${countItem} товара`
+    }
+
     React.useEffect(() => {
         fetchCartItems()
     }, [])
@@ -50,15 +61,14 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({ children,
                 <SheetDescription className="hidden" />
                 <SheetHeader>
                     <SheetTitle>
-                        В корзине <span className="font-bold">{items.length} товар</span>
+                        В корзине <span className="font-bold">{resultCountItem}</span>
                     </SheetTitle>
                 </SheetHeader>
 
                 <div className="-mx-6 mt-5 overflow-auto scrollbar flex-1">
-                    <div className="mb-2">
-                        {items.map((item) => (
+                    {items.map((item) => (
+                        <div key={item.id} className="mb-2">
                             <CartDrawerItem
-                                key={item.id}
                                 id={item.id}
                                 imageUrl={item.imageUrl}
                                 details={
@@ -78,8 +88,8 @@ export const CartDrawer: React.FC<React.PropsWithChildren<Props>> = ({ children,
                                 }
                                 onClickRemove={() => removeCartItem(item.id)}
                             />
-                        ))}
-                    </div>
+                        </div>
+                    ))}
                 </div>
 
                 <SheetFooter className="-mx-6 bg-white p-8">

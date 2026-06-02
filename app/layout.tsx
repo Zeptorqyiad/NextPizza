@@ -1,10 +1,11 @@
-import { Nunito } from "next/font/google"
-import "./globals.css"
+import { Nunito } from 'next/font/google'
+import './globals.css'
+import { Toaster } from 'react-hot-toast'
 
 const nunito = Nunito({
-    subsets: ["cyrillic"],
-    variable: "--font-nunito",
-    weight: ["400", "500", "600", "700", "800", "900"],
+    subsets: ['cyrillic'],
+    variable: '--font-nunito',
+    weight: ['400', '500', '600', '700', '800', '900'],
 })
 
 export default function RootLayout({
@@ -14,7 +15,10 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={nunito.className}>{children}</body>
+            <body className={nunito.className}>
+                {children}
+                <Toaster />
+            </body>
         </html>
     )
 }
