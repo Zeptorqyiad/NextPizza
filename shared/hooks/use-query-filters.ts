@@ -1,9 +1,10 @@
 'use client'
 
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Filters } from './use-filters'
 import React from 'react'
 import qs from 'qs'
+
+import { Filters } from './use-filters'
 
 export const useQueryFilters = (filters: Filters) => {
     const router = useRouter()
@@ -27,5 +28,5 @@ export const useQueryFilters = (filters: Filters) => {
         router.push(newUrl, {
             scroll: false,
         })
-    }, [filters, router, searchParams])
+    }, [filters])
 }
