@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { toast } from 'react-hot-toast'
 
@@ -7,9 +9,11 @@ import { ChoosePizzaForm, ChooseProductForm } from './index'
 
 interface Props {
     product: ProductWithRelations
+    onSubmit?: VoidFunction
+    className?: string
 }
 
-export const ProductForm: React.FC<Props> = ({ product }) => {
+export const ProductForm: React.FC<Props> = ({ product, onSubmit: _onSubmit, className }) => {
     const addCartItem = useCartStore((state) => state.addCartItem)
     const loading = useCartStore((state) => state.loading)
 
@@ -26,6 +30,8 @@ export const ProductForm: React.FC<Props> = ({ product }) => {
             })
 
             toast.success(`${product.name} добавлен в корзину`)
+
+            _onSubmit?.()
         } catch (error) {
             console.error(error)
             toast.error('Не удалось добавить товар в корзину')
