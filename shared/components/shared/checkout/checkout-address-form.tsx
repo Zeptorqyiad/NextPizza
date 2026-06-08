@@ -1,9 +1,15 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import React from 'react'
 
-import { AddressInput, ErrorText, FormTextarea, WhiteBlock } from '@/shared/components/shared'
+import { ErrorText, FormTextarea, WhiteBlock } from '@/shared/components/shared'
 import { Controller, useFormContext } from 'react-hook-form'
+
+const AddressInput = dynamic(
+    () => import('@/shared/components/shared').then((mod) => mod.AddressInput),
+    { ssr: false },
+)
 
 interface Props {
     className?: string
