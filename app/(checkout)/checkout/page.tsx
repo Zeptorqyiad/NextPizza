@@ -53,13 +53,19 @@ export default function CheckoutPage() {
                                 removeCartItem={removeCartItem}
                             />
 
-                            <CheckoutPersonalForm />
+                            <CheckoutPersonalForm
+                                className={loading ? 'opacity-40 pointer-events-none' : ''}
+                            />
 
                             <CheckoutAddressForm />
                         </div>
 
                         <div className="w-[450px]">
-                            <CheckoutSidebar totalAmount={totalAmount} loading={loading} />
+                            <CheckoutSidebar
+                                totalAmount={totalAmount}
+                                loading={loading}
+                                className={loading ? 'opacity-40 pointer-events-none' : ''}
+                            />
                         </div>
                     </div>
                 </form>
