@@ -7,8 +7,8 @@ import { Button, Skeleton } from '../ui'
 
 interface Props {
     className?: string
-    loading?: boolean
     totalAmount: number
+    loading?: boolean
 }
 
 const VAT = 15
@@ -25,7 +25,7 @@ export const CheckoutSidebar: React.FC<Props> = ({ className, totalAmount, loadi
                 {loading ? (
                     <Skeleton className="w-48 h-11" />
                 ) : (
-                    <span className="text-[34px] font-extrabold">{totalPrice} ₽</span>
+                    <span className="h-11 text-[34px] font-extrabold">{totalPrice} ₽</span>
                 )}
             </div>
 
@@ -36,7 +36,9 @@ export const CheckoutSidebar: React.FC<Props> = ({ className, totalAmount, loadi
                         Стоимость корзины:
                     </div>
                 }
-                value={loading ? <Skeleton className="h-6 w-16 rounded-[6px]" /> : `${totalAmount} ₽`}
+                value={
+                    loading ? <Skeleton className="h-6 w-16 rounded-[6px]" /> : `${totalAmount} ₽`
+                }
             />
             <CheckoutItemDetails
                 title={
@@ -54,10 +56,20 @@ export const CheckoutSidebar: React.FC<Props> = ({ className, totalAmount, loadi
                         Доставка:
                     </div>
                 }
-                value={loading ? <Skeleton className="h-6 w-12 rounded-[6px]" /> : `${DELIVERY_PRICE} ₽`}
+                value={
+                    loading ? (
+                        <Skeleton className="h-6 w-12 rounded-[6px]" />
+                    ) : (
+                        `${DELIVERY_PRICE} ₽`
+                    )
+                }
             />
 
-            <Button type="submit" className="w-full h-14 rounded-2xl mt-6 text-base font-bold">
+            <Button
+                loading={loading}
+                type="submit"
+                className="w-full h-14 rounded-2xl mt-6 text-base font-bold"
+            >
                 Перейти к оплате
                 <ArrowRight className="w-5 ml-2" />
             </Button>

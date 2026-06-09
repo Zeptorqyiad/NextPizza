@@ -1,7 +1,9 @@
 'use client'
 
+import React from 'react'
 import { FormProvider, useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { toast } from 'react-hot-toast'
 
 import {
     CheckoutSidebar,
@@ -13,8 +15,10 @@ import {
 } from '@/shared/components'
 import { useCart } from '@/shared/hooks'
 import { checkoutFormSchema, CheckoutFormValues } from '@/shared/constants'
+import { createOrder } from '@/app/actions'
 
 export default function CheckoutPage() {
+    const [submitting, setSubmitting] = React.useState(false)
     const { totalAmount, updateItemQuantity, items, removeCartItem, loading } = useCart()
 
     const form = useForm<CheckoutFormValues>({
@@ -29,8 +33,23 @@ export default function CheckoutPage() {
         },
     })
 
-    const onSubmit: SubmitHandler<CheckoutFormValues> = (data) => {
-        console.log(data)
+    const onSubmit: SubmitHandler<CheckoutFormValues> = async (data) => {
+        try {
+            setSubmitting(true)
+
+            await createOrder(data)
+
+            toast.error('Заказ успешно оформлен! Переход на оплату', {
+                icon: '✅',
+            })
+        } catch (error) {
+            console.log(error)
+            setSubmitting(false)
+            
+            toast.error('Не удалось создать заказ', {
+                icon: '❌',
+            })
+        }
     }
 
     const onCLickCountButton = (id: number, quantity: number, type: 'plus' | 'minus') => {
@@ -51,6 +70,7 @@ export default function CheckoutPage() {
                                 items={items}
                                 onCLickCountButton={onCLickCountButton}
                                 removeCartItem={removeCartItem}
+                                loading={loading}
                             />
 
                             <CheckoutPersonalForm
@@ -63,7 +83,7 @@ export default function CheckoutPage() {
                         <div className="w-[450px]">
                             <CheckoutSidebar
                                 totalAmount={totalAmount}
-                                loading={loading}
+                                loading={loading || submitting}
                                 className={loading ? 'opacity-40 pointer-events-none' : ''}
                             />
                         </div>
