@@ -1,12 +1,15 @@
 'use client'
 
-import { cn } from '@/shared/lib/utils'
-import React from 'react'
-import { CartButton, Container, SearchInput } from './index'
-import Image from 'next/image'
-import { Button } from '../ui'
+import { useSearchParams } from 'next/navigation'
+import { toast } from 'react-hot-toast'
 import { User } from 'lucide-react'
+import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+
+import { CartButton, Container, SearchInput } from '@/shared/components/shared'
+import { Button } from '@/shared/components/ui'
+import { cn } from '@/shared/lib/utils'
 
 interface Props {
     hasSearch?: boolean
@@ -15,10 +18,19 @@ interface Props {
 }
 
 export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, className }) => {
+    const searchParams = useSearchParams()
+
+    React.useEffect(() => {
+        console.log(searchParams, 999)
+
+        if (searchParams.has('paid')) {
+            toast.success('Заказ успешно оплачен! Информация отправлена на почту.')
+        }
+    }, [])
+
     return (
         <header className={cn('border-b', className)}>
             <Container className="flex items-center justify-between py-8">
-                {/** Левая часть */}
                 <Link href="/">
                     <div className="flex items-center gap-4">
                         <Image src="/logo.png" alt="Logo" width={35} height={35} />
@@ -36,7 +48,6 @@ export const Header: React.FC<Props> = ({ hasSearch = true, hasCart = true, clas
                     </div>
                 )}
 
-                {/** Правая часть */}
                 <div className="flex items-center gap-3">
                     <Button variant="outline" className="flex items-center gap-1">
                         <User size={16} />
