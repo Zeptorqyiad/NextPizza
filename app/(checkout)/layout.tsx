@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 
 import { Header, Container } from '@/shared/components/shared'
 
@@ -11,7 +11,9 @@ export default function CheckoutLayout({ children }: { children: React.ReactNode
     return (
         <main className="min-h-screen bg-[#F4F1EE]">
             <Container>
-                <Header className="border-b-gray-200" hasSearch={false} hasCart={false} />
+                <Suspense fallback={<div className="h-24" />}>
+                    <Header className="border-b-gray-200" hasSearch={false} hasCart={false} />
+                </Suspense>
                 {children}
             </Container>
         </main>

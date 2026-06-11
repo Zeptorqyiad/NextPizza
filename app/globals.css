@@ -68,6 +68,15 @@ html {
         --ring: 24.6 95% 53.1%;
         --radius: 18px;
     }
+
+    * {
+        border-color: hsl(var(--border));
+    }
+
+    body {
+        background-color: hsl(var(--background));
+        color: hsl(var(--foreground));
+    }
 }
 
 * {
@@ -98,17 +107,8 @@ html {
     }
 }
 
-@layer base {
-    * {
-        @apply border-border;
-    }
-    body {
-        @apply bg-background text-foreground;
-    }
-}
-
 #nprogress .bar {
-    background: hsl(var(--primary)) !important;
+    background-color: hsl(var(--primary)) !important;
 }
 
 #nprogress .peg {
