@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react'
 
-import { Title, TopBar, Container, Filters } from '@/shared/components/shared'
+import { Title, TopBar, Container, Filters, Stories } from '@/shared/components/shared'
 import { ProductsGroupList } from '@/shared/components/shared/products-group-list'
 import { findPizzas, GetSearchParams } from '@/shared/lib/find-pizzas'
 
@@ -15,6 +15,8 @@ export default async function Home({ searchParams }: { searchParams: Promise<Get
             </Container>
 
             <TopBar categories={categories.filter((category) => category.products.length > 0)} />
+
+            <Stories />
 
             <Container className="mt-10 pb-[80px]">
                 <div className="flex gap-15">
