@@ -163,7 +163,7 @@ model StoryItem {
     story   Story @relation(fields: [storyId], references: [id])
 
     sourceUrl String
-    
+
     createdAt DateTime @default(now())
 }
 
